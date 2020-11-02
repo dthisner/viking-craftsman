@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+backend/gin-bin
+backend/public/bundle.js
+backend/main
+backend/tmp
+npm-debug.log
+web
+tmp

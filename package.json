@@ -1,0 +1,13 @@
+{
+  "name": "viking-craftsman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "be": "air -c backend/.air.conf",
+    "fe": "cd client && npm start",
+    "install": "cd client && npm install && cd ../backend && go get -d ./..."
+  },
+  "author": "",
+  "license": "ISC"
+}
