@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Card, Header, Icon } from "semantic-ui-react";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
@@ -16,20 +16,24 @@ function BoozeName(props) {
 }
 
 function BoozeVotes(props) {
-  const cookie = cookies.get(props._id)
-  let colorName = ''
-  let voted
-  if (cookie === 'notVoted') {
-    colorName = 'green'
-    voted = true
+  const cookie = cookies.get(props._id);
+  let colorName = "";
+  let voted;
+  if (cookie === "notVoted") {
+    colorName = "green";
+    voted = true;
   } else {
-    colorName = 'grey'
-    voted = false
+    colorName = "grey";
+    voted = false;
   }
 
   return (
-    <Card.Content textAlign="left" extra >
-      <Icon name='beer' color={colorName} onClick={() => props.updateVote(props._id, voted, props.office)} />
+    <Card.Content textAlign="left" extra>
+      <Icon
+        name="beer"
+        color={colorName}
+        onClick={() => props.updateVote(props._id, voted, props.office)}
+      />
       {props.votes}
     </Card.Content>
   );
@@ -41,7 +45,7 @@ class ListBooze extends Component {
 
     this.state = {
       booze: "",
-      items: []
+      items: [],
     };
   }
 
@@ -49,9 +53,9 @@ class ListBooze extends Component {
     this.getBooze();
   }
 
-  onChange = event => {
+  onChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -64,88 +68,94 @@ class ListBooze extends Component {
         .post(
           `${endpoint}/booze`,
           {
-            booze
+            booze,
           },
           {
             headers: {
-              "Content-Type": "application/json"
-            }
+              "Content-Type": "application/json",
+            },
           }
         )
-        .then(res => {
+        .then((res) => {
           this.getTask();
           this.setState({
-            task: ""
+            task: "",
           });
           console.log(res);
         })
         .catch(function (error) {
           console.log(error);
-        })
+        });
     }
   };
 
   getBooze = () => {
-    const office = this.props.officeLocation
-    axios.get(`${endpoint}/booze`, {
-      params: {
-        office_location: this.props.officeLocation
-      }
-    })
-      .then(res => {
+    const office = this.props.officeLocation;
+    axios
+      .get(`${endpoint}/booze`, {
+        params: {
+          office_location: this.props.officeLocation,
+        },
+      })
+      .then((res) => {
         console.log(res);
         if (res.data) {
           this.setState({
-            items: res.data.map(item => {
+            items: res.data.map((item) => {
               return (
                 <Card key={item._id} fluid>
                   <Card.Content>
                     <BoozeName name={item.name} />
                     <Card.Meta textAlign="left">
-                      <span className='date'>{item.base_type}</span>
+                      <span className="date">{item.base_type}</span>
                     </Card.Meta>
                     <Card.Description textAlign="left">
                       Currently in stock: {item.in_stock.toString()}
                     </Card.Description>
                     <Card.Meta textAlign="right">
-                      <div > Volume: {item.volume} cl</div>
+                      <div> Volume: {item.volume} cl</div>
                     </Card.Meta>
                   </Card.Content>
-                  <BoozeVotes votes={item.votes} _id={item._id} updateVote={this.updateVote} office={office} />
+                  <BoozeVotes
+                    votes={item.votes}
+                    _id={item._id}
+                    updateVote={this.updateVote}
+                    office={office}
+                  />
                 </Card>
               );
-            })
+            }),
           });
         } else {
           this.setState({
-            items: []
+            items: [],
           });
         }
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   };
 
   updateVote = (id, voted, office) => {
-    let value
+    let value;
 
     if (voted) {
-      value = -1
-      cookies.set(id, 'voted');
+      value = -1;
+      cookies.set(id, "voted");
     } else {
-      value = 1
-      cookies.set(id, 'notVoted');
+      value = 1;
+      cookies.set(id, "notVoted");
     }
 
     axios({
-      method: 'put',
+      method: "put",
       url: `${endpoint}/booze/ranking/${id}`,
-      data: { "value": value },
-      params: { office_location: office, },
-      headers: { 'Content-Type': 'application/json' },
+      data: { value: value },
+      params: { office_location: office },
+      headers: { "Content-Type": "application/json" },
     })
-      .then(res => {
+      .then((res) => {
         console.log(res);
         this.getBooze();
       })
@@ -166,7 +176,7 @@ class ListBooze extends Component {
         } else {
           // Something happened in setting up the request that triggered an Error
           console.log("Some other problem");
-          console.log('Error', error.message);
+          console.log("Error", error.message);
         }
         console.log(error.config);
       });

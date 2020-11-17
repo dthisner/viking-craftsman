@@ -1,29 +1,37 @@
-import React, { Component } from 'react'
-import { Form, Input } from 'semantic-ui-react'
+import React, { Component } from "react";
+import { Form, Input } from "semantic-ui-react";
 import axios from "axios";
 
 let endpoint = `${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT_BE}/${process.env.REACT_APP_API_VERSION}/api`;
 
 export default class AdminLogin extends Component {
-  state = { name: '', baseType: '', officeLocation: '', why: '', firstName: '', lastName: '' }
+  state = {
+    name: "",
+    baseType: "",
+    officeLocation: "",
+    why: "",
+    firstName: "",
+    lastName: "",
+  };
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    const data = this.state
-    const { name, password } = this.state
-    console.log(data)
+    const data = this.state;
+    const { name, password } = this.state;
+    console.log(data);
 
     axios({
-      method: 'post',
+      method: "post",
       url: `${endpoint}/admin`,
       data: {
-        name, password
+        name,
+        password,
       },
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     })
       .then((result) => {
         //access the results here....
@@ -45,41 +53,39 @@ export default class AdminLogin extends Component {
         } else {
           // Something happened in setting up the request that triggered an Error
           console.log("Some other problem");
-          console.log('Error', error.message);
+          console.log("Error", error.message);
         }
         console.log(error.config);
       });
-
-  }
+  };
 
   render() {
-    const { name, password } = this.state
+    const { name, password } = this.state;
 
     return (
-      < Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <h3> Unicorn! Login to use your POWERS! </h3>
-        <Form.Group widths='equal'>
+        <Form.Group widths="equal">
           <Form.Field
-            id='name'
+            id="name"
             control={Input}
-            label='Name'
-            name='name'
+            label="Name"
+            name="name"
             value={name}
-            placeholder='The name of your Unicorn!'
+            placeholder="The name of your Unicorn!"
             onChange={this.handleChange}
           />
           <Form.Field
-            id='password'
+            id="password"
             control={Input}
-            label='password'
-            name='password'
+            label="password"
+            name="password"
             value={password}
-            placeholder='Unicorn Password'
+            placeholder="Unicorn Password"
             onChange={this.handleChange}
           />
         </Form.Group>
-      </ Form>
-    )
+      </Form>
+    );
   }
-
 }
