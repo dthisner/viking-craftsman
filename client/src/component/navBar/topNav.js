@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import { Input, Menu } from 'semantic-ui-react'
-import history from "../../history";
+import history from "./history";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -23,17 +22,46 @@ class MenuComp extends React.Component {
   };
 
   render() {
-    // const { activeItem } = this.state
+    const { activeItem } = this.state;
 
     return (
       <div>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand
+            href="/"
+            name="Home"
+            active={activeItem === "home"}
+            onClick={this.handleItemClick}
+          >
+            Viking Craftsman
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link
+                href="/"
+                name="Home"
+                active={activeItem === "home"}
+                onClick={this.handleItemClick}
+              >
+                Home
+              </Nav.Link>
+              <Nav.Link
+                href="/blog"
+                name="Blog"
+                active={activeItem === "blog"}
+                onClick={this.handleItemClick}
+              >
+                Blog
+              </Nav.Link>
+              <Nav.Link
+                href="/aboutme"
+                name="AboutMe"
+                active={activeItem === "aboutme"}
+                onClick={this.handleItemClick}
+              >
+                About Me
+              </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 import TopNav from "./component/navBar/topNav";
-import Routes from "./Routes";
+import Routes from "./component/navBar/Routes";
 
 function App() {
   return (

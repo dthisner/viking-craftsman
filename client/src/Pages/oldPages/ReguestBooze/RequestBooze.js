@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "../App.css";
 
 import { Container } from "semantic-ui-react";
-import FormRequestBooze from "../component/forms/reguestBooze";
-import ListRequest from "../component/listBooze/List-Request";
+import FormRequestBooze from "../../../component/forms/reguestBooze";
+import ListRequest from "../../../component/listBooze/List-Request";
 
 export default class Toronto extends Component {
   render() {

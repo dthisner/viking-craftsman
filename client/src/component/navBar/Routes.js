@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 
-import LandingPage from "./Pages/LandingPage/LandingPage";
-import Toronto from "./Toronto/Toronto";
-import RequestBooze from "./ReguestBooze/RequestBooze";
+import LandingPage from "../../Pages/LandingPage/LandingPage";
+import Blog from "../../Pages/Blog/Blog";
+import AboutMe from "../../Pages/AboutMe/AboutMe";
+
 import history from "./history";
 
 export default class Routes extends Component {
@@ -13,8 +14,8 @@ export default class Routes extends Component {
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/home" component={LandingPage} />
-          <Route path="/toronto" component={Toronto} />
-          <Route path="/requests" component={RequestBooze} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/aboutme" component={AboutMe} />
         </Switch>
       </Router>
     );
