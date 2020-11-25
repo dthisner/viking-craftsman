@@ -23,7 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "lint": "eslint --ignore-path .gitignore .",
+    "format": "prettier --write --ignore-path .gitignore \"**/*.+(js|json)\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint-plugin-react": "^7.21.5"
+    "eslint-plugin-react": "^7.21.5",
+    "prettier": "^2.2.0"
   }
 }

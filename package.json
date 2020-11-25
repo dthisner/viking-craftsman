@@ -6,7 +6,9 @@
   "scripts": {
     "be": "air -c backend/.air.conf",
     "fe": "cd client && npm start",
-    "install": "cd client && npm install && cd ../backend && go get -d ./..."
+    "install": "cd client && npm install && cd ../backend && go get -d ./...",
+    "lint": "cd client && npm run lint",
+    "format": "cd client && npm run format"
   },
   "author": "",
   "license": "ISC"
