@@ -10,6 +10,6 @@
     "lint": "cd client && npm run lint",
     "format": "cd client && npm run format"
   },
-  "author": "",
+  "author": "Dennis Thisner - viking-craftsman.com",
   "license": "ISC"
 }
