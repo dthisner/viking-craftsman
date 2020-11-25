@@ -33,7 +33,7 @@ export default class AdminLogin extends Component {
       },
       headers: { "Content-Type": "application/json" },
     })
-      .then((result) => {
+      .then(() => {
         //access the results here....
       })
       .catch(function (error) {

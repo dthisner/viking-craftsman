@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, TextArea, Button, Select } from "semantic-ui-react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const typeOptions = [
   { key: "b", text: "Beer", value: "beer" },
@@ -14,6 +15,10 @@ const officeOptions = [
 ];
 
 let endpoint = `${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT_BE}/${process.env.REACT_APP_API_VERSION}/api`;
+
+FormRequestBooze.propTypes = {
+  officeLocation: PropTypes.string,
+};
 
 export default class FormRequestBooze extends Component {
   state = {
@@ -58,7 +63,7 @@ export default class FormRequestBooze extends Component {
       },
       headers: { "Content-Type": "application/json" },
     })
-      .then((result) => {
+      .then(() => {
         //access the results here....
       })
       .catch(function (error) {
