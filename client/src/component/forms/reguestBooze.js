@@ -16,10 +16,6 @@ const officeOptions = [
 
 let endpoint = `${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT_BE}/${process.env.REACT_APP_API_VERSION}/api`;
 
-FormRequestBooze.propTypes = {
-	officeLocation: PropTypes.string,
-};
-
 export default class FormRequestBooze extends Component {
 	state = {
 		name: 'Bob',
@@ -189,3 +185,7 @@ export default class FormRequestBooze extends Component {
 		);
 	}
 }
+
+FormRequestBooze.propTypes = {
+	officeLocation: PropTypes.string,
+};
