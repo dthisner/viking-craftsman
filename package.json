@@ -1,15 +1,63 @@
 {
-  "name": "viking-craftsman",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "viking_craftsman_website",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "be": "air -c backend/.air.conf",
-    "fe": "cd client && npm start",
-    "install": "cd client && npm install && cd ../backend && go get -d ./...",
-    "lint": "cd client && npm run lint",
-    "format": "cd client && npm run format"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
+    "check-types": "tsc",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|tsx|json)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different",
+    "validate": "npm-run-all check-types check-format lint build"
   },
-  "author": "Dennis Thisner - viking-craftsman.com",
-  "license": "ISC"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.10",
+    "axios": "^0.19.2",
+    "history": "^4.10.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.4.0",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "reactstrap": "^8.7.1",
+    "universal-cookie": "^4.0.3"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-react": "^7.21.5",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.2",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.2.0"
+  }
 }
