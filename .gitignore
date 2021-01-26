@@ -1,5 +1,12 @@
+# Generated filed/folders
+dist
 node_modules
-.DS_Store
 npm-debug.log
 web
 tmp
+
+# Mac OS
+.DS_Store
+
+# Env specifc 
+.env
