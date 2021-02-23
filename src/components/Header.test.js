@@ -30,7 +30,7 @@ tests.forEach(({link, expected}) => {
     expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
 
     const regex = new RegExp(expected, 'i') // correct way
-    userEvent.click(screen.getByTestId(`footer-link-${link}`))
+    userEvent.click(screen.getByTestId(`header-link-${link}`))
     expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(regex)
   })
 })
@@ -38,4 +38,15 @@ tests.forEach(({link, expected}) => {
 test('Landing at a bad page shos 404', () => {
   render(<App />, {route: '/this-will-not-worl'})
   expect(screen.getByText(/sorry! no match/i)).toBeInTheDocument()
+})
+
+test('Clicking on banner takes user to home', () => {
+  render(<App />, {route: '/blog'})
+
+  expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(
+    /blog posts/i,
+  )
+
+  userEvent.click(screen.getByTestId('banner-viking-crafstman'))
+  expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
 })

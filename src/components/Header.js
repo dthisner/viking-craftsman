@@ -6,13 +6,25 @@ const Header = () => {
     <div>
       <Link to="/">
         {' '}
-        <h2 role="banner">Viking Craftsman</h2>
+        <h2 role="banner" data-testid="banner-viking-crafstman">
+          Viking Craftsman
+        </h2>
       </Link>
 
-      <Link to="/blog">Blog</Link>
-      <Link to="/portfolio">Portfolio</Link>
-      <Link to="/about">About Me</Link>
-      <Link to="/contact">Contact</Link>
+      <div role="navigation">
+        <Link to="/blog" data-testid="header-link-blog">
+          Blog
+        </Link>
+        <Link to="/portfolio" data-testid="header-link-portfolio">
+          Portfolio
+        </Link>
+        <Link to="/about" data-testid="header-link-about">
+          About Me
+        </Link>
+        <Link to="/contact" data-testid="header-link-contact">
+          Contact
+        </Link>
+      </div>
     </div>
   )
 }

@@ -4,6 +4,7 @@ node_modules
 npm-debug.log
 web
 tmp
+coverage
 
 # Mac OS
 .DS_Store
