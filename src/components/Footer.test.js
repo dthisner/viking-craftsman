@@ -1,7 +1,7 @@
 import {screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import {render} from '../util/testing'
+import {render} from '../../test/util'
 import App from './App'
 
 const tests = [

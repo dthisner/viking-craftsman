@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <h3>Footer</h3>
       <div role="navigation">
         <Link to="/blog" data-testid="footer-link-blog">
@@ -19,7 +19,7 @@ const Footer = () => {
           Contact
         </Link>
       </div>
-    </div>
+    </footer>
   )
 }
 
