@@ -10,7 +10,6 @@
     "build": "webpack --mode=production",
     "cy": "npx cypress open",
     "lint": "jest --config test/jest.lint.js",
-    "check-types": "tsc",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|tsx|json)\"",
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different",

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 
-import {AboutMe, Portfolio, Home, Contact, BlogPosts, NoMatch} from './pages'
+import {AboutMe, Portfolio, Home, Contact, BlogPosts, NoMatch} from '../pages'
 
 const Router = () => {
   return (

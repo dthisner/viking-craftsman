@@ -29,7 +29,7 @@ tests.forEach(({link, expected}) => {
 
     expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
 
-    const regex = new RegExp(expected, 'i') // correct way
+    const regex = new RegExp(expected, 'i')
     userEvent.click(screen.getByTestId(`footer-link-${link}`))
     expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(regex)
   })
