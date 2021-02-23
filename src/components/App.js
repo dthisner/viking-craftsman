@@ -8,13 +8,11 @@ import Router from './Router'
 class App extends Component {
   render() {
     return (
-      <div>
-        <BrowserRouter>
-          <Header />
-          <Router />
-          <Footer />
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Header />
+        <Router />
+        <Footer />
+      </BrowserRouter>
     )
   }
 }
