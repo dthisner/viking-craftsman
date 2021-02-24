@@ -14,6 +14,6 @@ module.exports = {
     //   lines: 100,
     // },
   },
-  collectCoverageFrom: ['**/src/**/*.{js,jsx}'],
+  collectCoverageFrom: ['**/src/**/*.{js,jsx}', '!src/index.js'],
   projects: ['./test/jest.lint.js', './test/jest.client.js'],
 }
