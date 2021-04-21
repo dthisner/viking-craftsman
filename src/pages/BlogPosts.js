@@ -12,11 +12,13 @@ const BlogPosts = () => {
     const getData = async () => {
       var error = null
       const response = await blogger.get('/posts').catch(function (error) {
-        error = 'Warning! Problem loading blog posts, please try again later!'
+        return {
+          error: 'Problem loading blog posts, please try again later!',
+        }
       })
 
-      if (error) {
-        setBlogPosts({error})
+      if (response.error) {
+        setBlogPosts(response)
       } else {
         const data = response.data
         setpagnation({
@@ -38,9 +40,14 @@ const BlogPosts = () => {
   )
 }
 
-const RenderBlogposts = (blogPosts) => {
+export const RenderBlogposts = (blogPosts) => {
   if (_.isEmpty(blogPosts)) {
     return <div>Loading blog posts</div>
+  }
+  console.log(blogPosts)
+
+  if (blogPosts.error) {
+    return <div>{blogPosts.error}</div>
   }
 
   const data = blogPosts.map((post) => {
@@ -68,7 +75,7 @@ const RenderBlogposts = (blogPosts) => {
   return data
 }
 
-const RenderPagnation = (pagnation) => {
+export const RenderPagnation = (pagnation) => {
   return (
     <div className="row">
       <div className="col-sm">
@@ -85,18 +92,18 @@ const RenderPagnation = (pagnation) => {
   )
 }
 
-const postPreview = (c) => {
+export const postPreview = (c) => {
   var content = c.replace(/<[^>]+>/g, '')
 
   return content.substr(0, 100) + '...'
 }
 
-const dateFormat = (d) => {
+export const dateFormat = (d) => {
   return dateformat(d, 'dS mmmm yyyy').toString()
 }
 
 // Gets the first image from the blogpost
-const GetBlogImage = (post, title) => {
+export const GetBlogImage = (post, title) => {
   const image = post.match(/src="([^"]+)"/)
   if (!image) {
     return <img src="..." alt="..."></img>
