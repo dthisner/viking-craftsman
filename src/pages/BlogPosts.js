@@ -44,10 +44,13 @@ export const RenderBlogposts = (blogPosts) => {
   if (_.isEmpty(blogPosts)) {
     return <div>Loading blog posts</div>
   }
-  console.log(blogPosts)
 
   if (blogPosts.error) {
-    return <div>{blogPosts.error}</div>
+    return (
+      <div className="alert alert-danger" align="center" role="alert">
+        {blogPosts.error}
+      </div>
+    )
   }
 
   const data = blogPosts.map((post) => {
