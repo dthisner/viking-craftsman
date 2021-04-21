@@ -12,18 +12,44 @@ const Header = () => {
       </Link>
 
       <div role="navigation">
-        <Link to="/blog" data-testid="header-link-blog">
-          Blog
-        </Link>
-        <Link to="/portfolio" data-testid="header-link-portfolio">
-          Portfolio
-        </Link>
-        <Link to="/about" data-testid="header-link-about">
-          About Me
-        </Link>
-        <Link to="/contact" data-testid="header-link-contact">
-          Contact
-        </Link>
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/blog"
+              data-testid="header-link-blog"
+            >
+              Blog
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/portfolio"
+              data-testid="header-link-portfolio"
+            >
+              Portfolio
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/about"
+              data-testid="header-link-about"
+            >
+              About Me
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              to="/contact"
+              data-testid="header-link-contact"
+            >
+              Contact
+            </Link>
+          </li>
+        </ul>
       </div>
     </header>
   )
