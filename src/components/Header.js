@@ -1,9 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import styles from './Header.module.css'
 
 const Header = () => {
   return (
-    <header>
+    <header style={{backgroundColor: 'black'}}>
       <Link to="/">
         {' '}
         <h2 role="banner" data-testid="banner-viking-crafstman">
@@ -11,20 +12,20 @@ const Header = () => {
         </h2>
       </Link>
 
-      <div role="navigation">
-        <ul className="nav nav-tabs">
+      <div>
+        <ul className="nav justify-content-center">
           <li className="nav-item">
             <Link
-              className="nav-link"
+              className={`${styles.link} nav-link`}
               to="/blog"
               data-testid="header-link-blog"
             >
               Blog
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item ">
             <Link
-              className="nav-link"
+              className={`${styles.link} nav-link`}
               to="/portfolio"
               data-testid="header-link-portfolio"
             >
@@ -33,7 +34,7 @@ const Header = () => {
           </li>
           <li className="nav-item">
             <Link
-              className="nav-link"
+              className={`${styles.link} nav-link`}
               to="/about"
               data-testid="header-link-about"
             >
@@ -42,7 +43,7 @@ const Header = () => {
           </li>
           <li className="nav-item">
             <Link
-              className="nav-link"
+              className={`${styles.link} nav-link`}
               to="/contact"
               data-testid="header-link-contact"
             >

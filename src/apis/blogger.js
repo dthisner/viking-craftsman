@@ -12,3 +12,19 @@ export default Axios.create({
     key: authKey,
   },
 })
+
+export const getPagnationPosts = async (pageToken) => {
+  const response = await Axios.get('/posts', {
+    baseURL: `${baseUrl}${id}`,
+    params: {
+      key: authKey,
+      pageToken,
+    },
+  }).catch(() => {
+    return {
+      error: 'Problem loading next blogpost page!',
+    }
+  })
+
+  return response
+}

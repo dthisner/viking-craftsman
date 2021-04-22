@@ -2,47 +2,82 @@ import _ from 'lodash'
 import dateformat from 'dateformat'
 import React, {useEffect, useState} from 'react'
 
-import blogger from '../apis/blogger'
+import blogger, {getPagnationPosts} from '../apis/blogger'
+import styles from './BlogPosts.module.css'
 
 const BlogPosts = () => {
   const [blogPosts, setBlogPosts] = useState({})
-  const [pagnation, setpagnation] = useState({next: null, prev: null})
+  const [pagnation, setPagnation] = useState({next: null, prev: null})
 
   useEffect(() => {
     const getData = async () => {
-      var error = null
-      const response = await blogger.get('/posts').catch(function (error) {
+      const response = await blogger.get('/posts').catch(() => {
         return {
           error: 'Problem loading blog posts, please try again later!',
         }
       })
 
-      if (response.error) {
-        setBlogPosts(response)
-      } else {
-        const data = response.data
-        setpagnation({
-          next: data.nextPageToken,
-          prev: data.prevPageToken,
-        })
-        setBlogPosts(data.items)
-      }
+      updatePostData(response)
     }
     getData()
   }, [])
+
+  const updatePostData = (response) => {
+    if (response.error) {
+      setBlogPosts(response)
+    } else {
+      const data = response.data
+      setPagnation({
+        next: data.nextPageToken,
+        prev: data.prevPageToken,
+      })
+      setBlogPosts(data.items)
+    }
+  }
+
+  const LoadMore = async (action) => {
+    const response = await getPagnationPosts(action)
+
+    const data = {blogPosts}
+    response.data.items.forEach((item) => {
+      data.blogPosts.push(item)
+    })
+    response.data.items = data.blogPosts
+
+    updatePostData(response)
+  }
+
+  const RenderPagnation = (pagnation) => {
+    var renderData = 'No More posts'
+
+    if (pagnation.next) {
+      renderData = (
+        <button
+          onClick={() => {
+            LoadMore(pagnation.next)
+          }}
+          className={styles.link}
+        >
+          Load More...
+        </button>
+      )
+    }
+
+    return <div align="center">{renderData}</div>
+  }
 
   return (
     <div>
       <h1 role="heading">Blog Posts</h1>
       {RenderBlogposts(blogPosts)}
-      <div className="">{RenderPagnation(pagnation)}</div>
+      <div>{RenderPagnation(pagnation)}</div>
     </div>
   )
 }
 
 export const RenderBlogposts = (blogPosts) => {
   if (_.isEmpty(blogPosts)) {
-    return <div>Loading blog posts</div>
+    return <div>Loading blog posts...</div>
   }
 
   if (blogPosts.error) {
@@ -76,23 +111,6 @@ export const RenderBlogposts = (blogPosts) => {
     )
   })
   return data
-}
-
-export const RenderPagnation = (pagnation) => {
-  return (
-    <div className="row">
-      <div className="col-sm">
-        {`<<<`} <a href={pagnation.prev}> Prev </a>
-      </div>
-      <div className="col-sm" align="center">
-        |
-      </div>
-      <div className="col-sm " align="right">
-        {' '}
-        <a href={pagnation.next}> Next {`>>>`}</a>
-      </div>
-    </div>
-  )
 }
 
 export const postPreview = (c) => {
