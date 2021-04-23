@@ -127,7 +127,7 @@ export const dateFormat = (d) => {
 export const GetBlogImage = (post, title) => {
   const image = post.match(/src="([^"]+)"/)
   if (!image) {
-    return <img src="..." alt="..."></img>
+    return <img src="" alt="Missing Image"></img>
   }
 
   return (
