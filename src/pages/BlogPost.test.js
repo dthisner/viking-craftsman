@@ -1,13 +1,9 @@
 import React from 'react'
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-  fireEvent,
-} from '@testing-library/react'
+import {render, screen, waitForElementToBeRemoved} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import {getPosts as mockGetPosts} from '../api/blogger'
-import BlogPost from './BlogPosts'
+import BlogPost, {RenderBlogposts, GetBlogImage} from './BlogPosts'
 
 const blogPosts = {
   nextPageToken: 'CgkIChjA3I2yxC0Qo8vB_9rq7554',
@@ -87,7 +83,7 @@ describe('Testing Blogger API to get posts', () => {
       screen.queryByText(/loading blog posts/i),
     )
     mockGetPosts.mockResolvedValueOnce({data: loadMorePosts})
-    fireEvent.click(screen.getByText(/load more/i))
+    userEvent.click(screen.getByText(/load more/i))
 
     await waitForElementToBeRemoved(() => screen.getByTestId('load-more-posts'))
 
@@ -111,16 +107,42 @@ describe('Testing Blogger API to get posts', () => {
   })
 })
 
-// describe('Testing Blog Post functionality', () => {
-//   test('Renders Posts', async () => {
-//     console.log('test')
-//   })
+describe('Testing Rendering Blogposts', () => {
+  test('Able to render loading icon', async () => {
+    render(<RenderBlogposts />)
 
-//   test('Blogger API is called twice when loading more data', async () => {
-//     console.log('test')
-//   })
+    expect(screen.getByText(/loading blog posts/i)).toBeInTheDocument()
+  })
 
-//   test('Blogger API returns an error', async () => {
-//     console.log('test')
-//   })
-// })
+  test('Able to render multiple posts', async () => {
+    render(<RenderBlogposts blogPosts={blogPosts.items} />)
+
+    expect(screen.getByText(/we sold our van/i)).toBeInTheDocument()
+    expect(screen.getByText(/we are testing this post/i)).toBeInTheDocument()
+  })
+
+  test('Able to render single post', async () => {
+    render(<RenderBlogposts blogPosts={loadMorePosts.items} />)
+
+    expect(screen.getByText(/loading more data/i)).toBeInTheDocument()
+  })
+})
+
+describe('Testing Extracting first Image URLs from blog post', () => {
+  test('Able to render loading icon', async () => {
+    render(<GetBlogImage post="missing image" />)
+    expect(screen.getByAltText(/missing image/i)).toBeInTheDocument()
+  })
+
+  test('Able to render loading icon', async () => {
+    const postContent =
+      '<figure class="wp-block-image size-large"><img alt="" class="wp-image-1131" src="http://viking-craftsman.com/wp-content/uploads/2021/01/IMG_20210106_140820-1024x768.jpg" /></figure><br /><h2>Conclusion</h2><p>I would'
+
+    render(<GetBlogImage post={postContent} title="testing like a boss" />)
+    expect(screen.getByAltText(/testing like a boss/i)).toBeInTheDocument()
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'src',
+      'http://viking-craftsman.com/wp-content/uploads/2021/01/IMG_20210106_140820-1024x768.jpg',
+    )
+  })
+})

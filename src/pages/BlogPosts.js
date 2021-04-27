@@ -66,13 +66,13 @@ const BlogPosts = () => {
   return (
     <div>
       <h1 role="heading">Blog Posts</h1>
-      {RenderBlogposts(blogPosts)}
+      <RenderBlogposts blogPosts={blogPosts} />
       <div>{RenderPagnation(pagnation)}</div>
     </div>
   )
 }
 
-export const RenderBlogposts = (blogPosts) => {
+export const RenderBlogposts = ({blogPosts}) => {
   if (_.isEmpty(blogPosts)) {
     return <div data-testid="loading-blog-posts">Loading blog posts...</div>
   }
@@ -90,33 +90,36 @@ export const RenderBlogposts = (blogPosts) => {
     )
   }
 
-  const data = blogPosts.map((post) => {
-    return (
-      <div className="card mb-3" key={post.id}>
-        <div className="row g-0">
-          <div className="col-md-4">
-            {GetBlogImage(post.content, post.title)}
-          </div>
-          <div className="col-md-8">
-            <div className="card-body">
-              <h5 className="card-title">{post.title} </h5>
-              <p className="card-text">{previewText(post.content, 100)}</p>
-              <p className="card-text">
-                <small className="text-muted">
-                  Published: {formatDate(post.published)}
-                </small>
-              </p>
-            </div>
+  return blogPosts.map((post) => {
+    return <BlogPost key={post.id} post={post} />
+  })
+}
+
+export const BlogPost = ({post}) => {
+  return (
+    <div className="card mb-3">
+      <div className="row g-0">
+        <div className="col-md-4">
+          <GetBlogImage post={post.content} title={post.title} />
+        </div>
+        <div className="col-md-8">
+          <div className="card-body">
+            <h5 className="card-title">{post.title} </h5>
+            <p className="card-text">{previewText(post.content, 100)}</p>
+            <p className="card-text">
+              <small className="text-muted">
+                Published: {formatDate(post.published)}
+              </small>
+            </p>
           </div>
         </div>
       </div>
-    )
-  })
-  return data
+    </div>
+  )
 }
 
 // Gets the first image from the blogpost
-export const GetBlogImage = (post, title) => {
+export const GetBlogImage = ({post, title}) => {
   const image = post.match(/src="([^"]+)"/)
   if (!image) {
     return <img src="" alt="Missing Image"></img>
