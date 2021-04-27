@@ -1,9 +1,9 @@
 import _ from 'lodash'
-import dateformat from 'dateformat'
 import React, {useEffect, useState} from 'react'
 
-import blogger, {getPagnationPosts} from '../apis/blogger'
+import {getPosts} from '../api/blogger'
 import styles from './BlogPosts.module.css'
+import {previewText, formatDate} from '../util/stringFormatting'
 
 const BlogPosts = () => {
   const [blogPosts, setBlogPosts] = useState({})
@@ -11,11 +11,7 @@ const BlogPosts = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await blogger.get('/posts').catch(() => {
-        return {
-          error: 'Problem loading blog posts, please try again later!',
-        }
-      })
+      const response = await getPosts()
 
       updatePostData(response)
     }
@@ -36,7 +32,7 @@ const BlogPosts = () => {
   }
 
   const LoadMore = async (action) => {
-    const response = await getPagnationPosts(action)
+    const response = await getPosts(action)
 
     const data = {blogPosts}
     response.data.items.forEach((item) => {
@@ -53,6 +49,7 @@ const BlogPosts = () => {
     if (pagnation.next) {
       renderData = (
         <button
+          data-testid="load-more-posts"
           onClick={() => {
             LoadMore(pagnation.next)
           }}
@@ -77,12 +74,17 @@ const BlogPosts = () => {
 
 export const RenderBlogposts = (blogPosts) => {
   if (_.isEmpty(blogPosts)) {
-    return <div>Loading blog posts...</div>
+    return <div data-testid="loading-blog-posts">Loading blog posts...</div>
   }
 
   if (blogPosts.error) {
     return (
-      <div className="alert alert-danger" align="center" role="alert">
+      <div
+        role="alert"
+        className="alert alert-danger"
+        align="center"
+        role="alert"
+      >
         {blogPosts.error}
       </div>
     )
@@ -98,10 +100,10 @@ export const RenderBlogposts = (blogPosts) => {
           <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">{post.title} </h5>
-              <p className="card-text">{postPreview(post.content)}</p>
+              <p className="card-text">{previewText(post.content, 100)}</p>
               <p className="card-text">
                 <small className="text-muted">
-                  Published: {dateFormat(post.published)}
+                  Published: {formatDate(post.published)}
                 </small>
               </p>
             </div>
@@ -111,16 +113,6 @@ export const RenderBlogposts = (blogPosts) => {
     )
   })
   return data
-}
-
-export const postPreview = (c) => {
-  var content = c.replace(/<[^>]+>/g, '')
-
-  return content.substr(0, 100) + '...'
-}
-
-export const dateFormat = (d) => {
-  return dateformat(d, 'dS mmmm yyyy').toString()
 }
 
 // Gets the first image from the blogpost

@@ -22,31 +22,30 @@ const tests = [
     expected: 'contact',
   },
 ]
+describe('Testing footer', () => {
+  tests.forEach(({link, expected}) => {
+    test(`Using Footer = Able to Navigate to ${test.link}`, () => {
+      render(<App />)
 
-tests.forEach(({link, expected}) => {
-  test(`Using Footer = Able to Navigate to ${test.link}`, () => {
-    render(<App />)
+      expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
 
-    expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
-
-    const regex = new RegExp(expected, 'i')
-    userEvent.click(screen.getByTestId(`header-link-${link}`))
-    expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(regex)
+      const regex = new RegExp(expected, 'i')
+      userEvent.click(screen.getByTestId(`header-link-${link}`))
+      expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(regex)
+    })
   })
-})
 
-test('Landing at a bad page shos 404', () => {
-  render(<App />, {route: '/this-will-not-worl'})
-  expect(screen.getByText(/sorry! no match/i)).toBeInTheDocument()
-})
+  test('Landing at a bad page shos 404', () => {
+    render(<App />, {route: '/this-will-not-worl'})
+    expect(screen.getByText(/sorry! no match/i)).toBeInTheDocument()
+  })
 
-test('Clicking on banner takes user to home', () => {
-  render(<App />, {route: '/blog'})
+  test('Clicking on banner takes user to home', () => {
+    render(<App />, {route: '/about'})
 
-  expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(
-    /blog posts/i,
-  )
+    expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/about/i)
 
-  userEvent.click(screen.getByTestId('banner-viking-crafstman'))
-  expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
+    userEvent.click(screen.getByTestId('banner-viking-crafstman'))
+    expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/home/i)
+  })
 })
