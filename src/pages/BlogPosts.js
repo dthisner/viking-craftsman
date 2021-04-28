@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Axios from 'axios'
 import React, {useEffect, useState} from 'react'
 
 import {getPosts} from '../api/blogger'
@@ -10,12 +11,18 @@ const BlogPosts = () => {
   const [pagnation, setPagnation] = useState({next: null, prev: null})
 
   useEffect(() => {
+    const source = Axios.CancelToken.source()
+
     const getData = async () => {
       const response = await getPosts()
 
       updatePostData(response)
     }
     getData()
+
+    return () => {
+      source.cancel('Component got unmounted')
+    }
   }, [])
 
   const updatePostData = (response) => {
@@ -43,7 +50,7 @@ const BlogPosts = () => {
     updatePostData(response)
   }
 
-  const RenderPagnation = (pagnation) => {
+  const RenderPagnation = ({pagnation}) => {
     var renderData = 'No More posts'
 
     if (pagnation.next) {
@@ -67,7 +74,7 @@ const BlogPosts = () => {
     <div>
       <h1 role="heading">Blog Posts</h1>
       <RenderBlogposts blogPosts={blogPosts} />
-      <div>{RenderPagnation(pagnation)}</div>
+      <RenderPagnation pagnation={pagnation} />
     </div>
   )
 }

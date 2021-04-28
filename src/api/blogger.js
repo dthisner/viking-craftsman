@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const baseUrl = 'https://www.googleapis.com/blogger/v3/blogs'
+const baseUrl = process.env.BLOGGER_API
 const id = process.env.BLOGGER_ID
 const authKey = process.env.BLOGGER_AUTH_KEY
 
@@ -8,7 +8,7 @@ const authKey = process.env.BLOGGER_AUTH_KEY
 
 export const getPosts = async (pageToken) => {
   const response = await Axios.get('/posts', {
-    baseURL: `${baseUrl}/${id}`,
+    baseURL: `${baseUrl}/blogs/${id}`,
     params: {
       key: authKey,
       pageToken,
