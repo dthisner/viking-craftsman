@@ -1,0 +1,127 @@
+[
+  {
+    "company": "Apply Digital",
+    "startDate": "Jan 2019",
+    "endDate": "",
+    "location": "Vancouver, BC, Canada",
+    "industry": "Software",
+    "positions": [
+      {
+        "role": "Senior QA Engineer",
+        "startDate": "April 2020",
+        "endDate": "",
+        "responsibillities": [
+          "Setting up Cypress for new projects to run locally and in CI",
+          "Teaching other QA about automation testing",
+          "Maintaining existing E2E tests",
+          "Adding E2E tests",
+          "Writting Performance tests",
+          "Writting API tests",
+          "Writting Test Cases",
+          "Maintaining Test Cases",
+          "Write testing tools"
+        ],
+        "tech": [
+          "Cypress",
+          "jMeter",
+          "PostMan",
+          "JavaScript",
+          "Gherkin",
+          "Git",
+          "CI (BitBucket)"
+        ]
+      },
+      {
+        "role": "QA Engineer",
+        "startDate": "Jan 2019",
+        "endDate": "Apr 2020",
+        "responsibillities": ""
+      }
+    ],
+    "projects": [
+      {
+        "name": "Freedom",
+        "startDate": "",
+        "endDate": "",
+        "responsibillities": ""
+      }
+    ]
+  },
+  {
+    "company": "Cumul8",
+    "startDate": "May 2016",
+    "endDate": "Dec 2018",
+    "location": "Vancouver, BC, Canada",
+    "industry": "Software",
+    "positions": [
+      {
+        "role": "Quality Assurance Engineer",
+        "startDate": "May 2016",
+        "endDate": "Dec 2019",
+        "responsibillities": "",
+        "technologies": ["docker", "kubernetes", "CI"]
+      },
+      {
+        "role": "Quality Assurance Specialist",
+        "startDate": "Nov 2015",
+        "endDate": "May 2016",
+        "responsibillities": ""
+      }
+    ],
+    "projects": [
+      {
+        "name": "",
+        "startDate": "",
+        "endDate": "",
+        "responsibilitties": ""
+      }
+    ]
+  },
+  {
+    "company": "United Front Games",
+    "startDate": "Mar 2015",
+    "endDate": "Nov 2015",
+    "location": "Vancouver, BC, Canada",
+    "industry": "Games",
+    "positions": [
+      {
+        "role": "Triad Wars QA Dev Support",
+        "startDate": "May 2016",
+        "endDate": "Dec 2019",
+        "responsibillities": ""
+      }
+    ],
+    "projects": [
+      {
+        "name": "Triad Wars",
+        "startDate": "May 2016",
+        "endDate": "Dec 2019",
+        "responsibilitties": ""
+      }
+    ]
+  },
+  {
+    "company": "Cumul8",
+    "startDate": "May 2016",
+    "endDate": "Dec 2018",
+    "location": "Vancouver, BC, Canada",
+    "industry": "Software",
+    "positions": [
+      {
+        "role": "Quality Assurance",
+        "startDate": "May 2016",
+        "endDate": "Dec 2019",
+        "responsibillities": "",
+        "technologies": []
+      }
+    ],
+    "projects": [
+      {
+        "name": "",
+        "startDate": "May 2016",
+        "endDate": "Dec 2019",
+        "responsibilitties": ""
+      }
+    ]
+  }
+]

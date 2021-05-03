@@ -66,22 +66,32 @@ const BlogPosts = () => {
         </button>
       )
     }
-
     return <div align="center">{renderData}</div>
   }
 
   return (
-    <div>
+    <div className="container-fluid" style={{maxWidth: '800px'}}>
+      {' '}
       <h1 role="heading">Blog Posts</h1>
       <RenderBlogposts blogPosts={blogPosts} />
-      <RenderPagnation pagnation={pagnation} />
+      {!_.isEmpty(blogPosts) && <RenderPagnation pagnation={pagnation} />}
     </div>
   )
 }
 
 export const RenderBlogposts = ({blogPosts}) => {
   if (_.isEmpty(blogPosts)) {
-    return <div data-testid="loading-blog-posts">Loading blog posts...</div>
+    return (
+      <div className="d-flex justify-content-center">
+        <div
+          className="spinner-border"
+          data-testid="loading-blog-postsspinner-border"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+        <p>Loading Blog Posts...</p>
+      </div>
+    )
   }
 
   if (blogPosts.error) {
@@ -98,13 +108,13 @@ export const RenderBlogposts = ({blogPosts}) => {
   }
 
   return blogPosts.map((post) => {
-    return <BlogPost key={post.id} post={post} />
+    return <BlogPost key={post.id} post={post} className="" />
   })
 }
 
 export const BlogPost = ({post}) => {
   return (
-    <div className="card mb-3">
+    <div className="card shadow-sm p-3 mb-3 bg-white rounded">
       <div className="row g-0">
         <div className="col-md-4">
           <GetBlogImage post={post.content} title={post.title} />
