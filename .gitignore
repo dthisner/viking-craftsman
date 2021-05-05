@@ -11,3 +11,5 @@ coverage
 
 # Env specifc 
 .env
+
+artFiles

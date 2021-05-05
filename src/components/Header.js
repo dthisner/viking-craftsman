@@ -1,15 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+
 import styles from './Header.module.css'
+import Banner from '../assets/banner.png'
 
 const Header = () => {
   return (
-    <header style={{backgroundColor: 'black'}}>
+    <header style={{backgroundColor: 'white'}}>
       <Link to="/">
         {' '}
-        <h2 role="banner" data-testid="banner-viking-crafstman">
-          Viking Craftsman
-        </h2>
+        <img
+          alt="Viking Craftsman Banner"
+          src={Banner}
+          data-testid="banner-viking-crafstman"
+          className="rounded mx-auto d-block"
+        ></img>
       </Link>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
         <div
